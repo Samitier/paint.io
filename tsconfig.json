@@ -1,0 +1,25 @@
+{
+	"compilerOptions": {
+		"target": "es2015",
+		"module": "es2015",
+		"strict": true,
+		"jsx": "preserve",
+		"moduleResolution": "node",
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"allowSyntheticDefaultImports": true,
+		"strictPropertyInitialization": false,
+		"noImplicitAny": true,
+		"strictNullChecks": false,
+		"sourceMap": true,
+		"baseUrl": ".",
+		"types": [
+			"node",
+		],
+		"paths": {
+			"@/*": [
+				"src/*"
+			]
+		}
+	}
+}

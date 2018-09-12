@@ -1,0 +1,15 @@
+{
+	"compilerOptions": {
+		"target": "es2015",
+		"module": "commonjs",
+		"strict": true,
+		"esModuleInterop": true,
+		"moduleResolution": "node",
+		"allowSyntheticDefaultImports": true,
+		"strictPropertyInitialization": false,
+		"noImplicitAny": true,
+		"types": [
+			"node",
+		],
+	}
+}
