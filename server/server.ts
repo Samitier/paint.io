@@ -17,7 +17,6 @@ const app = express()
 
 const port = process.env.port || 3001
 
-// Create server
 http.createServer(app)
 	.listen(port)
 	.on(

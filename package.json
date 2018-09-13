@@ -7,7 +7,7 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "heroku-postbuild": "vue-cli-service build",
-    "start": "ts-node --project server/tsconfig.json server/server.ts"
+    "start": "ts-node --project tsconfig-node.json server/server.ts"
   },
   "dependencies": {
     "compression": "1.7.2",

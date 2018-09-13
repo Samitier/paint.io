@@ -1,13 +1,16 @@
 <template>
 	<main class="fullscreen">
-		hello world
+		<DrawingArea/>
 	</main>
 </template>
 
 <script lang="ts">
 	import { Component, Vue } from "vue-property-decorator"
+	import DrawingArea from "@/components/drawing-area.vue"
 
-	@Component
+	@Component({
+		components: { DrawingArea }
+	})
 	export default class App extends Vue {}
 </script>
 <style lang="stylus">
