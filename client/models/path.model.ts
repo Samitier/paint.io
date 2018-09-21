@@ -4,7 +4,7 @@ export default class Path {
 
 	constructor(
 		public dots: Dot[] = [],
-		public color: string = "#444",
+		public color: string = "#444444",
 		public width: number = 5
 	) {}
 

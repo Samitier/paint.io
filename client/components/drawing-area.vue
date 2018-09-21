@@ -1,13 +1,15 @@
 <template>
-	<canvas 
-		ref="canvas"
-		width="600"
-		height="600"
-		@mousedown="onStartDraw"
-		@mousemove="onDraw"
-		@mouseleave="onStopDraw"
-		@mouseup="onStopDraw"
-	></canvas>
+	<div>
+		<canvas 
+			ref="canvas"
+			width="600"
+			height="600"
+			@mousedown="onStartDraw"
+			@mousemove="onDraw"
+			@mouseleave="onStopDraw"
+			@mouseup="onStopDraw"
+		></canvas>
+	</div>
 </template>
 
 <script lang="ts">
