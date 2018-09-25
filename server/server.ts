@@ -14,7 +14,7 @@ const app = express()
 	// Setting the static file server to the folder "public"
 	.use(express.static(path.join(__dirname, "../dist")))
 	// Return index.html instead on 404
-	.use((_, res) => res.sendFile(path.join(__dirname, "../dist/index.html")))
+	// .use((_, res) => res.sendFile(path.join(__dirname, "../dist/index.html")))
 
 const port = process.env.PORT || 3001
 
