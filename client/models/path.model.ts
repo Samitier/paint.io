@@ -5,7 +5,8 @@ export default class Path {
 	constructor(
 		public dots: Dot[] = [],
 		public color: string = "#444444",
-		public width: number = 5
+		public width: number = 1,
+		public isEraser: boolean = false
 	) {}
 
 	addDot(c: Dot) {

@@ -22,6 +22,7 @@ import Dot from "@/models/dot.model"
 export default class DrawingArea extends Vue {
 
 	@State currentPath: Path
+	@State socket: SocketIOClient.Socket
 	@Mutation resetPath: () => void
 	@Mutation addDotToCurrentPath: (coords: object) => void
 	private isDrawing: boolean = false
@@ -38,6 +39,10 @@ export default class DrawingArea extends Vue {
 
 	mounted() {
 		this.context.lineJoin = this.context.lineCap = "round"
+		this.socket.on("renderPath", (p: Path) => this.renderPath(p))
+		this.socket.on("renderPaths",
+			({ paths }: any) => (paths as Path[]).forEach(p => this.renderPath(p))
+		)
 	}
 
 	onStartDraw({ pageX, pageY }: MouseEvent) {
@@ -55,6 +60,7 @@ export default class DrawingArea extends Vue {
 		if (!this.isDrawing) return
 		this.isDrawing = false
 		this.addClick(pageX, pageY)
+		this.socket.emit("newPath", this.currentPath)
 	}
 
 	private addClick(mouseX: number, mouseY: number) {
@@ -65,8 +71,9 @@ export default class DrawingArea extends Vue {
 	}
 
 	private renderDot() {
-		const { dots, color, width } = this.currentPath
-		this.context.strokeStyle = color
+		const { dots, color, width, isEraser } = this.currentPath
+		if (isEraser) this.context.strokeStyle = "#FFF"
+		else this.context.strokeStyle = color
 		this.context.lineWidth = width
 		this.context.beginPath()
 		if (dots.length === 1)
@@ -74,6 +81,18 @@ export default class DrawingArea extends Vue {
 		else {
 			this.context.moveTo(dots[dots.length - 2].x, dots[dots.length - 2].y)
 			this.context.lineTo(dots[dots.length - 1].x, dots[dots.length - 1].y)
+		}
+		this.context.stroke()
+	}
+
+	private renderPath(path: Path) {
+		const { dots, color, width, isEraser } = path
+		if (isEraser) this.context.strokeStyle = "#FFF"
+		else this.context.strokeStyle = color
+		this.context.lineWidth = width
+		this.context.beginPath()
+		for (const dot of path.dots) {
+			this.context.lineTo(dot.x, dot.y)
 		}
 		this.context.stroke()
 	}
