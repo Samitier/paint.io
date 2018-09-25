@@ -16,7 +16,7 @@ const app = express()
 	// Return index.html instead on 404
 	.use((_, res) => res.sendFile(path.join(__dirname, "../dist/index.html")))
 
-const port = process.env.port ? parseInt(process.env.port, 10) : 3001
+const port = process.env.PORT || 3001
 
 const server = http.createServer(app)
 	.listen(port)
