@@ -9,7 +9,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
 	state: {
 		currentPath: new Path(),
-		socket: io.connect(location.hostname + ":3002")
+		socket: io.connect(process.env.NODE_ENV === "production" ? location.href : "localhost:3002")
 	},
 	mutations: {
 		resetPath(state) {

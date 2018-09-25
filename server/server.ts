@@ -17,7 +17,6 @@ const app = express()
 	.use((_, res) => res.sendFile(path.join(__dirname, "../dist/index.html")))
 
 const port = process.env.port ? parseInt(process.env.port, 10) : 3001
-const socketsPort = process.env.socketsPort ? parseInt(process.env.socketsPort, 10) : 3002
 
 const server = http.createServer(app)
 	.listen(port)
@@ -27,4 +26,4 @@ const server = http.createServer(app)
 		() => console.log("Server listening on port " + port)
 	)
 
-const socketsService = new SocketsService(socketsPort)
+const socketsService = new SocketsService(server)

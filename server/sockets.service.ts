@@ -8,8 +8,8 @@ export default class SocketsService {
 
 	private paths: Path[] = []
 
-	constructor(port: number) {
-		this.io = socketio(port)
+	constructor(server: Server) {
+		this.io = socketio(process.env.ENV === "production" ? server : "3002")
 		this.io.on("connection", s => this.onConnection(s))
 	}
 
