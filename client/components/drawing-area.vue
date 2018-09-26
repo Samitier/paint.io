@@ -6,7 +6,7 @@
 			height="600"
 			@mousedown="onStartDraw"
 			@touchstart="onStartDraw"
-			@touchmove.prevent="onDrawTouch"
+			@touchmove.prevent="onDraw"
 			@mousemove="onDraw"
 			@touchcancel="onStopDraw"
 			@mouseleave="onStopDraw"
@@ -49,27 +49,34 @@ export default class DrawingArea extends Vue {
 		)
 	}
 
-	onStartDraw({ pageX, pageY }: MouseEvent) {
+	onStartDraw(event: MouseEvent | TouchEvent) {
 		this.isDrawing = true
 		this.resetPath()
-		this.addClick(pageX, pageY)
+		const [x, y] = this.getCoords(event)
+		this.addClick(x, y)
 	}
 
-	onDraw({ pageX, pageY }: MouseEvent) {
+	onDraw(event: MouseEvent | TouchEvent) {
 		if (!this.isDrawing) return
-		this.addClick(pageX, pageY)
+		const [x, y] = this.getCoords(event)
+		this.addClick(x, y)
 	}
 
-	onDrawTouch({ targetTouches }: TouchEvent) {
-		if (!this.isDrawing || targetTouches.length === 0) return
-		this.addClick(targetTouches[0].pageX, targetTouches[0].pageY)
-	}
-
-	onStopDraw({ pageX, pageY }: MouseEvent) {
+	onStopDraw(event: MouseEvent | TouchEvent) {
 		if (!this.isDrawing) return
 		this.isDrawing = false
-		this.addClick(pageX, pageY)
+		const [x, y] = this.getCoords(event)
+		this.addClick(x, y)
 		this.socket.emit("newPath", this.currentPath)
+	}
+
+	// Util to get the coords of an event without caring if it is a MouseEvent or a TouchEvent
+	private getCoords(event: MouseEvent | TouchEvent) {
+		if (event instanceof TouchEvent) {
+			const touch = event.touches[0] || event.changedTouches[0]
+			return [touch.pageX, touch.pageY]
+		}
+		return [event.pageX, event.pageY]
 	}
 
 	private addClick(mouseX: number, mouseY: number) {
