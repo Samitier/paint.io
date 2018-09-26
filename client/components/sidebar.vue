@@ -71,7 +71,7 @@ export default class Sidebar extends Vue {
 }
 </script>
 
-<style lang="stylus">
+<style scoped lang="stylus">
 .hidden
 	visibility hidden
 	position absolute

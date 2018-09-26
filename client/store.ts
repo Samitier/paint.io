@@ -34,15 +34,7 @@ export default new Vuex.Store({
 		}
 	},
 	actions: {
-		// onNewAnswer({ commit }, { question, answer }) {
-		// 	commit("setAnswer", answer)
-		// 	commit("removeQuestion", question)
-		// 	commit("changeColors")
-		// }
 	},
 	getters: {
-		// result(state) {
-		// 	return state.quizz.results.find(r => state.points <= r.totalPoints)
-		// },
 	}
 })
