@@ -5,8 +5,12 @@
 			width="600"
 			height="600"
 			@mousedown="onStartDraw"
+			@touchstart="onStartDraw"
+			@touchmove.prevent="onDrawTouch"
 			@mousemove="onDraw"
+			@touchcancel="onStopDraw"
 			@mouseleave="onStopDraw"
+			@touchend="onStopDraw"
 			@mouseup="onStopDraw"
 		></canvas>
 	</div>
@@ -54,6 +58,11 @@ export default class DrawingArea extends Vue {
 	onDraw({ pageX, pageY }: MouseEvent) {
 		if (!this.isDrawing) return
 		this.addClick(pageX, pageY)
+	}
+
+	onDrawTouch({ targetTouches }: TouchEvent) {
+		if (!this.isDrawing || targetTouches.length === 0) return
+		this.addClick(targetTouches[0].pageX, targetTouches[0].pageY)
 	}
 
 	onStopDraw({ pageX, pageY }: MouseEvent) {

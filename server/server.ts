@@ -11,9 +11,9 @@ const app = express()
 	.use(compression())
 	// Heroku https redirect
 	.use(sslRedirect())
-	// Setting the static file server to the folder "public"
+	// Setting the static file server to the folder "dist"
 	.use(express.static(path.join(__dirname, "../dist")))
-	// Return index.html instead on 404
+	// Return index.html instead of 404
 	// .use((_, res) => res.sendFile(path.join(__dirname, "../dist/index.html")))
 
 const port = process.env.PORT || 3001
